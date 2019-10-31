@@ -1,31 +1,45 @@
-var myCar;
+var cars = [];
 
 function setup() {
   createCanvas(800, 600)
-  background(100);
 
-  myCar = new Car(10, 200);
-  myCar.display();
+  for (var i = 0; i < 100; i++) {
+    cars.push(new Car(random(5)));
+  }
+
+  for (var i = 0; i < 100; i++) {
+    cars[i].display();
+  }
 
 }
 
 function draw() {
+  background(100);
 
-  myCar.update();
+  for (var i = 0; i < 100; i++) {
+    cars[i].update();
+  }
 
 }
 
-function Car(tempSpeed, tempColor) {
+function Car(tempSpeed) {
 
   this.speed = tempSpeed;
-  this.color = tempColor;
+  this.color = random(255);
+  this.yMov = 0;
+  this.xPos = random(width);
 
   this.display = function () {
-    fill(0, 0, this.color);
+
   }
 
   this.update = function () {
-    square(10, 10, 20);
+    fill(0, 0, this.color);
+    push();
+    translate(this.xPos, this.yMov, 0);
+    square(0, -20, 20);
+    this.yMov += this.speed;
+    pop();
   }
 
   this.interaction = function () {
